@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liked Exercises</title>
+    <link rel="stylesheet" href="style2.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      .exercise-card {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 10px;
+        display: inline-block;
+        width: 200px;
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+      button {
+        margin-top: 10px;
+        padding: 8px;
+        background: red;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">Fitfinder</div>
+
+      <!-- Desktop Navigation -->
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Exercise.html">Start Exercise</a></li>
+        <li><a href="liked.html">Liked</a></li>
+        
+      </ul>
+
+      <!-- Hamburger Button (Mobile) -->
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </nav>
+
+    <!-- Sidebar Menu (Mobile) -->
+    <div class="nav-menu" id="nav-menu">
+      <button class="close-btn" id="close-btn">&times;</button>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="Exercise.html">Start Exercise</a></li>
+        <li><a href="liked.html">Liked</a></li>
+        <img style="width: 70px; height:70px ; margin-top: 2rem;" src="assests/img/circle-intersection-in-circle-layout.svg" alt="">
+
+      </ul>
+    </div>
+    <div class="co" style="margin-top: 10rem">
+      <h1>❤️Liked <span>Exercises</span> </h1>
+      <div id="likedExercises"></div>
+      <button onclick="clearFavorites()">Clear All</button>
+    </div>
+
+    <script>
+      function loadLikedExercises() {
+        const likedExercises =
+          JSON.parse(localStorage.getItem("likedExercises")) || [];
+        const container = document.getElementById("likedExercises");
+        container.innerHTML =
+          likedExercises.length === 0 ? "<p>No liked exercises yet.</p>" : "";
+
+        likedExercises.forEach((exercise) => {
+          const card = document.createElement("div");
+          card.className = "exercise-card";
+          card.innerHTML = `
+                    <h3>${exercise.name}</h3>
+                    <img src="${exercise.gifUrl}" alt="${exercise.name}">
+                    <p><strong>Target:</strong> ${exercise.target}</p>
+                    <p><strong>Equipment:</strong> ${exercise.equipment}</p>
+                    <button onclick="removeFromFavorites('${exercise.name}')">Remove</button>
+                `;
+          container.appendChild(card);
+        });
+      }
+
+      function removeFromFavorites(name) {
+        let likedExercises =
+          JSON.parse(localStorage.getItem("likedExercises")) || [];
+        likedExercises = likedExercises.filter(
+          (exercise) => exercise.name !== name
+        );
+        localStorage.setItem("likedExercises", JSON.stringify(likedExercises));
+        loadLikedExercises(); // Refresh list
+      }
+
+      function clearFavorites() {
+        localStorage.removeItem("likedExercises");
+        loadLikedExercises();
+      }
+
+      loadLikedExercises(); // Load on page open
+      document.addEventListener("DOMContentLoaded", () => {
+        const hamburger = document.getElementById("hamburger");
+        const navMenu = document.getElementById("nav-menu");
+        const closeBtn = document.getElementById("close-btn");
+
+        // Toggle Menu when clicking the hamburger button
+        hamburger.addEventListener("click", () => {
+          navMenu.classList.toggle("active");
+        });
+
+        // Close Menu when clicking the close button
+        closeBtn.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+        });
+
+        // Close menu when clicking outside of it
+        document.addEventListener("click", (event) => {
+          if (
+            !navMenu.contains(event.target) &&
+            !hamburger.contains(event.target)
+          ) {
+            navMenu.classList.remove("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

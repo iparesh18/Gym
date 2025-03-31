@@ -1,0 +1,255 @@
+@mixin italic-font {
+  font-family: "Abuget";
+}
+
+@mixin gilroy {
+  font-family: "Gilroy";
+}
+
+@mixin cursive {
+  font-family: "Flumtips";
+}
+
+@font-face {
+  font-family: "Abuget";
+  src: url("./assests/fonts/Abuget.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Flumtips";
+  src: url("./assests/fonts/Flumtips Noulevia.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./assests/fonts/Gilroy-ExtraBold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./assests/fonts/Gilroy-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Apply Fonts */
+
+// h1, h2 {
+//     font-family: 'Flumtips', sans-serif;
+// }
+
+// .navbar {
+//     font-family: 'Gilroy', sans-serif;
+// }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body,
+html {
+  background-color: #000000;
+  color: #eaeaea;
+  overflow-x: hidden;
+  // font-family: 'abuget';
+}
+
+main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #000000;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Logo */
+.logo {
+  @include italic-font();
+  color: red;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-weight: 100;
+}
+
+/* Navigation Links (Desktop) */
+.nav-links {
+  display: none;
+  list-style: none;
+  gap: 20px;
+}
+
+.nav-links li {
+  display: inline;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #eaeaea;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+  @include gilroy();
+}
+
+.nav-links a:hover {
+  color: #00c3ff;
+}
+
+/* Hamburger Button (Mobile) */
+.hamburger {
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: #eaeaea;
+  cursor: pointer;
+  display: block;
+}
+
+/* Sidebar Navigation (Mobile) */
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100vh;
+  background-color: rgb(169, 19, 19);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align items from the top */
+  padding-top: 80px; /* Moves the links upward */
+
+  transition: right 0.4s ease-in-out;
+  img{
+    width: 200px;
+    height: 200px;
+    animation: rotate360 10s ease-in-out infinite alternate;
+}
+}
+  // box-shadow: -2px 0 5px rgba(255, 255, 255, 0.2);
+  @keyframes rotate360 {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+/* Sidebar Links */
+.nav-menu ul {
+  list-style: none;
+  text-align: center;
+  margin-top: -20px;
+  padding: 0;
+  margin-top: 3rem;
+}
+
+.nav-menu li {
+  margin: 1rem 0;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 1.6rem;
+  transition: color 0.3s;
+  font-weight: 100;
+  @include gilroy();
+}
+
+.nav-menu a:hover {
+  color: #00c3ff;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #eaeaea;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Show Sidebar */
+.nav-menu.active {
+  right: 0;
+}
+.co {
+  h1 {
+    @include gilroy();
+    font-weight: 100;
+  }
+  span {
+    @include italic-font();
+    font-size: 2.8rem;
+    color: red;
+  }
+}
+.exercise-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px;
+  display: inline-block;
+  width: 200px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+button {
+    @include gilroy();
+  margin-top: 10px;
+  padding: .5rem 1.2rem;
+  background: red;
+  border-radius: 20px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+/* Desktop View */
+@media (min-width: 768px) {
+  .navbar {
+    background-color: #000;
+    padding: 2vw 3vw;
+  }
+  .hamburger {
+    display: none;
+  }
+
+  .nav-links {
+    display: flex;
+  }
+
+  .nav-menu {
+    display: none;
+  }
+}
