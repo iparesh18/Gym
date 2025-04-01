@@ -118,7 +118,7 @@ body,html {
     color: #EAEAEA;
     cursor: pointer;
     display: block;
-    margin-left: 15rem;
+    margin-left: 20rem;
     
 }
 
@@ -169,10 +169,13 @@ body,html {
 
 .nav-menu a {
     text-decoration: none;
-    color: #000000;
+    color: #ff0000;
+    background-color: #000;
+    padding: .3rem 1rem;
+    border-radius: 20px;
     font-size: 1.6rem;
     transition: color 0.3s;
-    font-weight: 100;
+    font-weight: 500;
     @include gilroy();
 }
 
